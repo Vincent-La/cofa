@@ -1,4 +1,5 @@
-dataset,difficulty_1,difficulty_2,difficulty_3,difficulty_outside_1_3
-arc,10000,10000,10000,0
-countdown,10000,10000,10000,0
-zebra,10000,10000,10000,0
+dataset,difficulty_1,difficulty_2,difficulty_3,difficulty_4,difficulty_5,difficulty_outside_1_5
+arc,10000,10000,10000,0,0,0
+countdown,10000,10000,10000,0,0,0
+zebra,10000,10000,10000,0,0,0
+math,915,2062,2514,2648,3360,0
