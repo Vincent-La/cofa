@@ -16,8 +16,8 @@ export VLLM_ATTENTION_BACKEND=XFORMERS
 
 python -m verl.trainer.main_ppo \
     algorithm.adv_estimator=grpo \
-    data.train_files=sec/data/arc/train.parquet \
-    data.val_files=sec/data/arc/test.parquet \
+    data.train_files=./data/arc/train_subset.parquet \
+    data.val_files=./data/arc/test.parquet \
     data.train_batch_size=256 \
     data.val_batch_size=512 \
     data.max_prompt_length=1024 \
