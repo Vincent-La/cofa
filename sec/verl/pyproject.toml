@@ -44,7 +44,6 @@ dependencies = [
     "wandb",
     "pylatexenc",
     "latex2sympy2",
-    "flash_attn",
 ]
 
 # Optional dependencies (extras_require in setup.py)

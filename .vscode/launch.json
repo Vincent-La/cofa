@@ -1,0 +1,82 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python PPO Trainer Debug",
+            "type": "debugpy",
+            "python": "",
+            "request": "launch",
+            "module": "verl.trainer.main_ppo",
+            "cwd": "/home/vince/cofa/sec/",
+            "justMyCode": true,
+            "env": {
+                // This is a placeholder for the actual number of GPUs determined at runtime in the shell script
+                // For local debugging, you may need to set a specific number or rely on the environment
+                "N_GPUS": "1",
+                "VLLM_ATTENTION_BACKEND": "XFORMERS"
+            },
+            "args": [
+                // Arguments start here
+                "algorithm.adv_estimator=grpo",
+                "data.train_files=data/countdown/train.parquet",
+                "data.val_files=data/countdown/test.parquet",
+                "data.train_batch_size=256",
+                "data.val_batch_size=512",
+                "data.max_prompt_length=1024",
+                "data.max_response_length=4096",
+                "actor_rollout_ref.model.path=Qwen/Qwen2.5-3B",
+                "actor_rollout_ref.actor.optim.lr=1e-6",
+                "actor_rollout_ref.model.use_remove_padding=True",
+                "actor_rollout_ref.actor.ppo_mini_batch_size=64",
+                "actor_rollout_ref.actor.use_dynamic_bsz=True",
+                "actor_rollout_ref.actor.ppo_max_token_len_per_gpu=32768",
+                "actor_rollout_ref.actor.use_kl_loss=True",
+                "actor_rollout_ref.actor.kl_loss_coef=0.00",
+                "actor_rollout_ref.actor.kl_loss_type=low_var_kl",
+                "actor_rollout_ref.actor.ulysses_sequence_parallel_size=1",
+                "actor_rollout_ref.model.enable_gradient_checkpointing=True",
+                "actor_rollout_ref.actor.fsdp_config.param_offload=False",
+                "actor_rollout_ref.actor.fsdp_config.grad_offload=False",
+                "actor_rollout_ref.actor.fsdp_config.optimizer_offload=False",
+                "actor_rollout_ref.rollout.tensor_model_parallel_size=1",
+                "actor_rollout_ref.rollout.name=vllm",
+                "actor_rollout_ref.rollout.temperature=1.0",
+                "actor_rollout_ref.rollout.val_temperature=1.0",
+                "actor_rollout_ref.rollout.gpu_memory_utilization=0.6",
+                "actor_rollout_ref.rollout.n=8",
+                "actor_rollout_ref.rollout.n_val=8",
+                "actor_rollout_ref.ref.fsdp_config.param_offload=True",
+                "algorithm.kl_ctrl.kl_coef=0.00",
+                "actor_rollout_ref.actor.entropy_coeff=0.000",
+                "trainer.critic_warmup=0",
+                "trainer.logger=['wandb']",
+                // You must replace ${input:expName} with a value when prompted
+                "trainer.project_name='countdown_sec'",
+                "trainer.experiment_name=countdown_debug",
+                "trainer.val_before_train=False",
+                // Uses the N_GPUS env variable set above
+                "trainer.n_gpus_per_node=1",
+                "trainer.nnodes=1",
+                "trainer.save_freq=-1",
+                "trainer.test_freq=10",
+                "trainer.default_hdfs_dir=null",
+                "trainer.total_epochs=1",
+                "trainer.sec.enable=True",
+                "trainer.sec.strategy=bandit",
+                "trainer.sec.bandit.lr=0.5",
+                "trainer.sec.bandit.objective=adv",
+                "trainer.total_training_steps=240",
+                "actor_rollout_ref.model.path=Qwen/Qwen2.5-3B"
+                // The $other_args are omitted as they are highly variable.
+                // You would add any specific extra arguments here.
+            ]
+        }
+    ],
+    "inputs": [
+        {
+            "id": "expName",
+            "type": "promptString",
+            "description": "Enter the experiment name (exp_name):"
+        }
+    ]
+}

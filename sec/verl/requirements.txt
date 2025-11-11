@@ -15,4 +15,5 @@ vllm<=0.6.3
 wandb
 pylatexenc
 latex2sympy2
-flash_attn
+# manually install pre-built wheel for speedup...
+# flash_attn
