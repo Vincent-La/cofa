@@ -39,14 +39,21 @@ rm flash_attn-2.8.3+cu12torch2.4cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
 ## Experiments
 
 
-<!-- ## TODO: Alternative: conda/pip
-```
-conda create -n COFA python==3.10.0
-``` -->
 
++ TODO: run scripts follow the original SEC repo setup, maybe better to just put all the params into the file itself 
 
+### ARC-1D Random (uniform sampling) Baseline
 ```
-sh examples/arc.sh difficulty_bandit_0.5_t1.0_Qwen2.5_0.5B \
+sh experiments/arc_baselines.sh arc_random_baseline \
+    trainer.sec.enable=True \
+    trainer.sec.strategy=random \
+    trainer.total_training_steps=240 \
+    actor_rollout_ref.model.path=Qwen/Qwen2.5-0.5B
+``` 
+
+### ARC-1D Sec Baseline
+```
+sh experiments/arc_baselines.sh arc_sec_baseline \
     trainer.sec.enable=True \
     trainer.sec.strategy=bandit \
     trainer.sec.bandit.lr=0.5 \
@@ -54,4 +61,3 @@ sh examples/arc.sh difficulty_bandit_0.5_t1.0_Qwen2.5_0.5B \
     trainer.total_training_steps=240 \
     actor_rollout_ref.model.path=Qwen/Qwen2.5-0.5B
 ``` 
-

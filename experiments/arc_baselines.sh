@@ -16,8 +16,8 @@ export VLLM_ATTENTION_BACKEND=XFORMERS
 
 python -m verl.trainer.main_ppo \
     algorithm.adv_estimator=grpo \
-    data.train_files=data/arc/train.parquet \
-    data.val_files=data/arc/test.parquet \
+    data.train_files=sec/data/arc/train.parquet \
+    data.val_files=sec/data/arc/test.parquet \
     data.train_batch_size=256 \
     data.val_batch_size=512 \
     data.max_prompt_length=1024 \
@@ -48,7 +48,7 @@ python -m verl.trainer.main_ppo \
     actor_rollout_ref.actor.entropy_coeff=0.000 \
     trainer.critic_warmup=0 \
     trainer.logger=['wandb'] \
-    trainer.project_name='countdown_sec' \
+    trainer.project_name='cofa' \
     trainer.experiment_name=$exp_name \
     trainer.val_before_train=False \
     trainer.n_gpus_per_node=$N_GPUS \
@@ -58,4 +58,4 @@ python -m verl.trainer.main_ppo \
     trainer.default_hdfs_dir=null \
     trainer.total_epochs=1 \
     trainer.logger=console \
-    $other_args 2>&1 | tee logs/countdown/${exp_name}.log
+    $other_args 2>&1 | tee logs/arc/${exp_name}.log

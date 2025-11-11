@@ -1,4 +1,5 @@
-sec/outputs
+**/outputs/
+**/logs/
 *.whl
 
 # Byte-compiled / optimized / DLL files
