@@ -1,0 +1,24 @@
+micromamba create -n python==3.12
+
+pip install sglang
+pip install torch-memory-saver
+
+uv pip install vllm==0.8.3
+
+uv pip install optree
+uv pip install tensordict
+uv pip install omegaconf
+uv pip install hydra-core
+uv pip install torchdata
+uv pip install codetiming
+pip install peft
+
+uv pip install pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0
+uv pip install flash_attn-2.7.2.post1+cu12torch2.6cxx11abiTRUE-cp312-cp312-linux_x86_64.whl
+
+uv pip install --no-deps -e .
+
+
+
+# uv pip install torch==2.7
+# uv pip install torchvision==0.22.0 torchaudio==2.7.0
