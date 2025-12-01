@@ -1,23 +1,26 @@
 #!/bin/bash
 
-# cp -r /home/vince/hf_models/qwen2.5_0.5b /tmp/qwen2.5_0.5b
-cp -r /home/vince/hf_models/qwen3_0.6b /tmp/qwen3_0.6b
-
-# model_dir='/tmp/qwen2.5_0.5b'
-model_dir='/tmp/qwen3_0.6b'
-# model_dir='Qwen/Qwen2.5-0.5B'
-
-train_files='/home/vince/data/gsm8k/train.parquet'
-test_files='/home/vince/data/gsm8k/test.parquet'
+project_name=$1
+experiment_name=$2
+train_path=$3
+test_path=$4
+model_dir=$5
 
 # install verl into container
 pip install --no-deps -e verl/
 
-# run verl script
+echo "Start verl script"
+echo "project_name: $project_name"
+echo "experiment_name: $experiment_name"
+echo "train_path: $train_path"
+echo "test_path: $test_path"
+echo "model_dir: $model_dir"
+
+
 python -m verl.trainer.main_ppo \
     algorithm.adv_estimator=grpo \
-    data.train_files=$train_files \
-    data.val_files=$test_files \
+    data.train_files=$train_path \
+    data.val_files=$test_path \
     data.train_batch_size=64 \
     data.max_response_length=1024 \
     data.truncation='error' \
@@ -46,14 +49,13 @@ python -m verl.trainer.main_ppo \
     trainer.val_before_train=True \
     trainer.critic_warmup=0 \
     trainer.logger='["console"]' \
-    trainer.project_name='verl_grpo_example_gsm8k' \
-    trainer.experiment_name='qwen2.5_0.5b_gsm8k_lora' \
+    trainer.project_name=$project_name \
+    trainer.experiment_name=$experiment_name \
     trainer.n_gpus_per_node=1 \
     trainer.nnodes=1 \
     trainer.save_freq=20 \
     trainer.test_freq=5 \
-    trainer.total_epochs=1 $@
+    trainer.total_epochs=15
 
-#cleanup
-# rm -rf /tmp/qwen2.5_0.5b
-rm -rf /tmp/qwen3_0.6b
+  # data.max_prompt_length=512 \
+    # data.filter_overlong_prompts=True \
