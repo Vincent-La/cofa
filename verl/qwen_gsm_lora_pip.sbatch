@@ -85,6 +85,7 @@ echo "Start verl script"
 
 srun --overlap --nodes=1 --ntasks=1 -w "$head_node" \
     apptainer run --nv --bind $verl_workdir $apptainer_image_path \
+    pip install -e ./verl/ \
     python -m verl.trainer.main_ppo \
     algorithm.adv_estimator=grpo \
     data.train_files=/scratch/zt1/project/cmsc848n/user/vla/cofa/verl/data/gsm8k/train.parquet \
