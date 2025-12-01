@@ -3,7 +3,12 @@ Curriculum Optimization for Agents (COfA)
 
 ## Installation
 
-### uv
+### Build Apptainer Image
+```
+apptainer pull verl_vllm.sif docker://verlai/verl:vllm011.latest
+```
+
+<!-- ### uv
 
 uv installation docs can be found [here](https://docs.astral.sh/uv/getting-started/installation/)
 
@@ -60,4 +65,4 @@ sh experiments/arc_baselines.sh arc_sec_baseline \
     trainer.sec.bandit.objective=adv \
     trainer.total_training_steps=240 \
     actor_rollout_ref.model.path=Qwen/Qwen2.5-0.5B
-``` 
+```  -->
