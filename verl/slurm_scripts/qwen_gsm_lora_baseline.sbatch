@@ -76,14 +76,17 @@ test_path='/scratch/zt1/project/cmsc848n/user/vla/cofa/data/gsm/test.parquet'
 model_dir='/scratch/zt1/project/cmsc848n/user/vla/hf_models/qwen3_0.6b'
 tmp_model_dir='/tmp/qwen3_0.6b'
 
+# output_dir='/scratch/zt1/project/cmsc848n/user/vla/cofa/verl/outputs/'
+
 echo "copying model dir to /tmp"
 cp -r $model_dir $tmp_model_dir
 
-cd /scratch/zt1/project/cmsc848n/user/vla/cofa
+# cd /scratch/zt1/project/cmsc848n/user/vla/cofa
 
 srun --overlap --nodes=1 --ntasks=1 -w "$head_node" \
     apptainer exec --nv --bind $verl_workdir $apptainer_image_path \
-    bash slurm_scripts/grpo_lora_template.sh $project_name $experiment_name $train_path $test_path $tmp_model_dir
+    bash verl/slurm_scripts/grpo_lora_template.sh $project_name $experiment_name $train_path $test_path $tmp_model_dir
   
 echo "cleanup /tmp model dir"
 rm -rf $tmp_model_dir
+

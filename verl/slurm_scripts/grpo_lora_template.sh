@@ -9,12 +9,16 @@ model_dir=$5
 # install verl into container
 pip install --no-deps -e verl/
 
+# to set correct relative path for mkdir outputs/
+cd verl/
+
 echo "Start verl script"
 echo "project_name: $project_name"
 echo "experiment_name: $experiment_name"
 echo "train_path: $train_path"
 echo "test_path: $test_path"
 echo "model_dir: $model_dir"
+echo "output_dir: $output_dir"
 
 
 python -m verl.trainer.main_ppo \
@@ -55,7 +59,10 @@ python -m verl.trainer.main_ppo \
     trainer.nnodes=1 \
     trainer.save_freq=20 \
     trainer.test_freq=5 \
-    trainer.total_epochs=15
+    trainer.total_epochs=15 \
+    
+    
+    #global_profiler.save_path=$output_dir
 
-  # data.max_prompt_length=512 \
+    # data.max_prompt_length=512 \
     # data.filter_overlong_prompts=True \
