@@ -71,8 +71,12 @@ sleep 10
 # NOTE: set verl params
 project_name='cofa_experiments'
 experiment_name='qwen3-0.6b_gsm8k_grpo_lora'
-train_path='/scratch/zt1/project/cmsc848n/user/vla/cofa/data/gsm/train_subset.parquet'
-test_path='/scratch/zt1/project/cmsc848n/user/vla/cofa/data/gsm/test.parquet'
+
+# note these need to be in binded dir for container to have access
+train_path='/home/vla/scratch/cofa/verl/data/gsm/train_subset.parquet'
+test_path='/home/vla/scratch/cofa/verl/data/gsm/test.parquet'
+
+# /tmp dir included in container by default
 model_dir='/scratch/zt1/project/cmsc848n/user/vla/hf_models/qwen3_0.6b'
 tmp_model_dir='/tmp/qwen3_0.6b'
 
