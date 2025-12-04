@@ -69,10 +69,10 @@ if __name__ == "__main__":
     
 
     # filename = "qwen_25_05b_responses.jsonl"
-    filename = "qwen.jsonl"
+    filename = "qwen25-05b-instruct_arc1k_evaluations.json"
     input_file = f"./difficulty_scripts/{filename}"
-    raw_output_file = f"./scores/gsm8k_scores/{args.method}/qwen_scores.jsonl"
-    output_file = f"./scores/gsm8k_scores/{args.method}/qwen_scores_normalized.jsonl"
+    raw_output_file = f"./scores/arc_scores/{args.method}/qwen_scores.jsonl"
+    output_file = f"./scores/arc_scores/{args.method}/qwen_scores_normalized.jsonl"
 
     model_name = "Qwen/Qwen2.5-0.5B-Instruct"
 
@@ -125,7 +125,7 @@ if __name__ == "__main__":
                         pass
 
         if scores:
-            figures_dir = f"scores/gsm8k_scores/{args.method}/figures"
+            figures_dir = f"scores/arc_scores/{args.method}/figures"
             os.makedirs(figures_dir, exist_ok=True)
             model_filename_safe = model_name.replace("/", "_")
 
